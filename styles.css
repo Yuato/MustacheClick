@@ -1,0 +1,13 @@
+#container{
+    font-family: 'Courier New', Courier, monospace
+}
+
+#header{
+    text-align: center;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
