@@ -24,7 +24,7 @@ window.addEventListener(load, function(){
         document.getElementById("num_of_cuts").innerHTML = formatNumber(clickercount);
     }
 
-    /*This is a helper function meant for changing numbers like thousands and millions into letters*/
+    /*This is a helper function meant for changing numbers like thousands and millions into smaller numbers with letters*/
     function formatNumber(num) {
     if (num >= 1000000000000) return (num / 1000000000000).toFixed(2) + "T";
     if (num >= 1000000000) return (num / 1000000000).toFixed(2) + "B";
