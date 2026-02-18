@@ -7,7 +7,9 @@ Purpose:
     -
 */
 
-window.addEventListener(load, function(){
+window.addEventListener("load", function(){
+    var clicker = this.document.getElementById("clicker");
+
     var clickercount = 0;
     var barbers = 0;
     var clickermultiple = 1;
@@ -17,6 +19,10 @@ window.addEventListener(load, function(){
     var clickerupgrade1 = 4;
     var clickerupgrade2 = 59;
     var clickerupgrade3 = 420;
+
+    clicker.addEventListener("click", function(){
+        cutMustache();
+    });
 
     /*This controls the clicker*/
     function cutMustache() {
