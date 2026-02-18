@@ -21,13 +21,24 @@ window.addEventListener(load, function(){
     /*This controls the clicker*/
     function cutMustache() {
         clickercount = clickercount + Math.round(1 * clickermultiple);
-        document.getElementById("num_of_cuts").innerHTML = clickercount;
+        document.getElementById("num_of_cuts").innerHTML = formatNumber(clickercount);
     }
+
+    /*This is a helper function meant for changing numbers like thousands and millions into letters*/
+    function formatNumber(num) {
+    if (num >= 1000000000000) return (num / 1000000000000).toFixed(2) + "T";
+    if (num >= 1000000000) return (num / 1000000000).toFixed(2) + "B";
+    if (num >= 1000000) return (num / 1000000).toFixed(2) + "M";
+    if (num >= 1000) return (num / 1000).toFixed(2) + "K";
+    
+    
+    return num.toLocaleString(); 
+}
 
     /*This increases the amount of workers*/
     function barberCutMustache() {
         clickercount = clickercount + (barbers * clickermultiple);
-        document.getElementById("num_of_cuts").innerHTML = clickercount;
+        document.getElementById("num_of_cuts").innerHTML = formatNumber(clickercount);
     }
 
     /*This controls how much a barber does per click*/
@@ -51,7 +62,7 @@ window.addEventListener(load, function(){
             clickercount = 0;
 
             document.getElementById("num_of_cuts").innerHTML = clickercount;
-            document.getElementById("cash").innerHTML = money
+            document.getElementById("cash").innerHTML = formatNumber(money);
         }
     }
 
@@ -64,10 +75,10 @@ window.addEventListener(load, function(){
             clickerupgrade2 = Math.round(clickerupgrade2 * 1.9);
             clickerupgrade3 = Math.round(clickerupgrade3 * 2.2);
         }
-        document.getElementById("cash").innerHTML = money;
-        document.getElementById("upgrades1").innerHTML = clickerupgrade1;
-        document.getElementById("upgrades2").innerHTML = clickerupgrade2;
-        document.getElementById("upgrades3").innerHTML = clickerupgrade3;
+        document.getElementById("cash").innerHTML = formatNumber(money);
+        document.getElementById("upgrades1").innerHTML = formatNumber(clickerupgrade1);
+        document.getElementById("upgrades2").innerHTML = formatNumber(clickerupgrade2);
+        document.getElementById("upgrades3").innerHTML = formatNumber(clickerupgrade3);
 
     }
 
@@ -79,11 +90,10 @@ window.addEventListener(load, function(){
             clickerupgrade2 = Math.round(clickerupgrade2 * 1.9);
             clickerupgrade3 = Math.round(clickerupgrade3 * 2.2);
         }
-        document.getElementById("cash").innerHTML = money;
-        document.getElementById("upgrades1").innerHTML = clickerupgrade1;
-        document.getElementById("upgrades2").innerHTML = clickerupgrade2;
-        document.getElementById("upgrades3").innerHTML = clickerupgrade3;
-
+        document.getElementById("cash").innerHTML = formatNumber(money);
+        document.getElementById("upgrades1").innerHTML = formatNumber(clickerupgrade1);
+        document.getElementById("upgrades2").innerHTML = formatNumber(clickerupgrade2);
+        document.getElementById("upgrades3").innerHTML = formatNumber(clickerupgrade3);
     }
 
     function upgrades3() {
@@ -94,10 +104,10 @@ window.addEventListener(load, function(){
             clickerupgrade2 = Math.round(clickerupgrade2 * 1.9);
             clickerupgrade3 = Math.round(clickerupgrade3 * 2.2);
         }
-        document.getElementById("cash").innerHTML = money;
-        document.getElementById("upgrades1").innerHTML = clickerupgrade1;
-        document.getElementById("upgrades2").innerHTML = clickerupgrade2;
-        document.getElementById("upgrades3").innerHTML = clickerupgrade3;
+        document.getElementById("cash").innerHTML = formatNumber(money);
+        document.getElementById("upgrades1").innerHTML = formatNumber(clickerupgrade1);
+        document.getElementById("upgrades2").innerHTML = formatNumber(clickerupgrade2);
+        document.getElementById("upgrades3").innerHTML = formatNumber(clickerupgrade3);
 
     }
 });
