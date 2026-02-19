@@ -1,3 +1,9 @@
+<!--
+Author: Tony Yuan and Omar Siyad
+File Created Date: Sat Feb 13 2026
+-->
+
+
 <!DOCTYPE html>
 
 <html>
@@ -18,21 +24,43 @@
             <div id="content">
                 <div id = "clicker_area">
                     <span>Mustaches:</span>
-                    <span id = "num_of_cuts">0</span>
+                    <span id = "mustaches">0</span>
+                    <br>
                     <img src = "images/Mustache.png" id = "clicker" draggable="false">
                 </div>
                 
-                <div id = "upgrades">
-                    <h1>Upgrades</h1>
-                    <h2>Bronze scissors</h2>
-                    <h2>Silver scissors</h2>
-                    <h2>Gold scissors</h2>
-                    <h1>Auto upgrades</h1>
-                    <h2>Straight razor</h2>
-                    <h2>Electric razor</h2>
+                <div id = "upgrades_area">
+                    <div class = "upgrades_section">
+                        <h1>Upgrades</h1>
+                        <div class = "upgrades" id = "upgrade1">
+                            <h2>Bronze scissors</h2>
+                            <h3>Cost: 0</h3>
+                        </div>
+                        <div class = "upgrades" id = "upgrade2">
+                            <h2>Silver Scissors</h2>
+                            <h3>Cost: 0</h3>
+                        </div>
+                        <div class = "upgrades" id = "upgrade3">
+                            <h2>Gold Scissors</h2>
+                            <h3>Cost: 0</h3>
+                        </div>
+                    </div>
+
+                    <div class = "upgrades_section">
+                        <h1>Auto upgrades</h1>
+                        <div class = "upgrades" id = "auto1">
+                            <h2>Bob</h2>
+                            <h3>Cost: 0</h3>
+                        </div>
+                        <div class = "upgrades" id = "auto2">
+                            <h2>Barber</h2>
+                            <h3>Cost: 0</h3>
+                        </div>
+                        <h2>Electric razor</h2>
+                    </div>
                 </div>
 
-                <div id = "rewards">
+                <div id = "rewards_area">
                     <h1>Rewards</h1>
                     <h2>Welcome</h2>
                     <p>Welcome To mustache clicker!</p>
@@ -42,7 +70,6 @@
                     <p>Congratulations for clicking a million times. I'm impressed.</p>
                     <h2>Upgrade</h2>
                     <p>Congratulations on your first upgrade</p>
-                    
                 </div>
             </div>
             

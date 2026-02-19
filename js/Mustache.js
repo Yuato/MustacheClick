@@ -7,113 +7,96 @@ Purpose:
     -
 */
 
+var mustaches = 0;
+
+//FUNCTIONS FOR TESTING PURPOSES
+function add_mustaches(num){
+    mustaches = mustaches + num;
+}
+
 window.addEventListener("load", function(){
-    var clicker = this.document.getElementById("clicker");
+    const clicker = this.document.getElementById("clicker");
+    const mustache_count = this.document.getElementById("mustaches")
+    const upgrade1 = this.document.getElementById("upgrade1");
+    const upgrade2 = this.document.getElementById("upgrade2");
+    const upgrade3 = this.document.getElementById("upgrade3");
+    const auto1 = this.document.getElementById("auto1");
+    const auto2 = this.document.getElementById("auto2");
 
     var clickercount = 0;
-    var barbers = 0;
-    var clickermultiple = 1;
-    var barberWorking = false;
-    var money = 0;
-    var clickerUpgradeScore = 0;
-    var clickerupgrade1 = 4;
-    var clickerupgrade2 = 59;
-    var clickerupgrade3 = 420;
+    var multiplier = 1;
 
+    var bob = 0;
+    var barbers = 0;
+    let barber_cost = 1000;
+    var barberWorking = false;
+    
+    var clickerUpgradeScore = 0;
+
+    /*This is a helper function meant for changing numbers like thousands and millions into smaller numbers with letters*/
+    function formatNumber(num) {
+        if (num >= 1000000000000) return (num / 1000000000000).toFixed(2) + "T";
+        if (num >= 1000000000) return (num / 1000000000).toFixed(2) + "B";
+        if (num >= 1000000) return (num / 1000000).toFixed(2) + "M";
+        if (num >= 1000) return (num / 1000).toFixed(2) + "K";
+        return num.toLocaleString(); 
+    }
+
+    function update(){
+        mustache_count.innerHTML = formatNumber(mustaches);
+    }
+
+    function auto_update(){
+        barberCutMustache();
+        bobCutMustache();
+        update();
+    }
+
+    this.setInterval(auto_update, 1000);
+
+    //Main clicker
     clicker.addEventListener("click", function(){
         cutMustache();
     });
 
     /*This controls the clicker*/
     function cutMustache() {
-        clickercount = clickercount + Math.round(1 * clickermultiple);
-        document.getElementById("num_of_cuts").innerHTML = formatNumber(clickercount);
+        clickercount++;
+        mustaches = mustaches + multiplier;
+        update();
     }
 
-    /*This is a helper function meant for changing numbers like thousands and millions into smaller numbers with letters*/
-    function formatNumber(num) {
-    if (num >= 1000000000000) return (num / 1000000000000).toFixed(2) + "T";
-    if (num >= 1000000000) return (num / 1000000000).toFixed(2) + "B";
-    if (num >= 1000000) return (num / 1000000).toFixed(2) + "M";
-    if (num >= 1000) return (num / 1000).toFixed(2) + "K";
-    
-    
-    return num.toLocaleString(); 
-}
+    function bobCutMustache() {
+        mustaches = mustaches + (barbers * multiplier);
+    }
 
-    /*This increases the amount of workers*/
     function barberCutMustache() {
-        clickercount = clickercount + (barbers * clickermultiple);
-        document.getElementById("num_of_cuts").innerHTML = formatNumber(clickercount);
+        mustaches = mustaches + (barbers * multiplier);
     }
 
-    /*This controls how much a barber does per click*/
-    function hireBarbers() {
-        barbers = barbers +1;
-        if (barberWorking == false){
-            barberWorking = true;
-            setInterval(function(){
-            barberCutMustache()
-                }, 1000)
+    upgrade1.addEventListener("click", function(){
+        if (mustaches >= 100){
+            mustaches -= 100;
+            upgrade1.style.display = "none"
+            multiplier++;
         }
-        document.getElementById("num_of_barbers").innerHTML = barbers;
+    });
+    
+    upgrade2.addEventListener("click", function(){
+    });
 
-    }
+    upgrade3.addEventListener("click", function(){
+        
+    });
 
+    auto1.addEventListener("click", function(){
+    });
 
-    /*This Focuses on how much hair is sold*/
-    function sellHair() {
-        if (clickercount > 0) {
-            money += Math.round(clickercount * 1.6);
-            clickercount = 0;
-
-            document.getElementById("num_of_cuts").innerHTML = clickercount;
-            document.getElementById("cash").innerHTML = formatNumber(money);
+    auto2.addEventListener("click", function(){
+        if (mustaches >= barber_cost){
+            mustaches -= barber_cost;
+            barbers++;
+            barber_cost = barber_cost*1.5;
         }
-    }
-
-
-    function upgrades1() {
-        if (money >= clickerupgrade1) {
-            money = money - clickerupgrade1;
-            clickermultiple += 1; 
-            clickerupgrade1 = Math.round(clickerupgrade1 * 1.5);
-            clickerupgrade2 = Math.round(clickerupgrade2 * 1.9);
-            clickerupgrade3 = Math.round(clickerupgrade3 * 2.2);
-        }
-        document.getElementById("cash").innerHTML = formatNumber(money);
-        document.getElementById("upgrades1").innerHTML = formatNumber(clickerupgrade1);
-        document.getElementById("upgrades2").innerHTML = formatNumber(clickerupgrade2);
-        document.getElementById("upgrades3").innerHTML = formatNumber(clickerupgrade3);
-
-    }
-
-    function upgrades2() {
-        if (money >= clickerupgrade2) {
-            money -= clickerupgrade2;
-            clickermultiple += 1.6; 
-            clickerupgrade1 = Math.round(clickerupgrade1 * 1.5);
-            clickerupgrade2 = Math.round(clickerupgrade2 * 1.9);
-            clickerupgrade3 = Math.round(clickerupgrade3 * 2.2);
-        }
-        document.getElementById("cash").innerHTML = formatNumber(money);
-        document.getElementById("upgrades1").innerHTML = formatNumber(clickerupgrade1);
-        document.getElementById("upgrades2").innerHTML = formatNumber(clickerupgrade2);
-        document.getElementById("upgrades3").innerHTML = formatNumber(clickerupgrade3);
-    }
-
-    function upgrades3() {
-        if (money >= clickerupgrade3) {
-            money -= clickerupgrade3;
-            clickermultiple += 2; 
-            clickerupgrade1 = Math.round(clickerupgrade1 * 1.5);
-            clickerupgrade2 = Math.round(clickerupgrade2 * 1.9);
-            clickerupgrade3 = Math.round(clickerupgrade3 * 2.2);
-        }
-        document.getElementById("cash").innerHTML = formatNumber(money);
-        document.getElementById("upgrades1").innerHTML = formatNumber(clickerupgrade1);
-        document.getElementById("upgrades2").innerHTML = formatNumber(clickerupgrade2);
-        document.getElementById("upgrades3").innerHTML = formatNumber(clickerupgrade3);
-
-    }
+    });
 });
