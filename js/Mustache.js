@@ -9,10 +9,6 @@ Purpose:
 
 var mustaches = 0;
 
-//FUNCTIONS FOR TESTING PURPOSES
-function add_mustaches(num){
-    mustaches = mustaches + num;
-}
 
 window.addEventListener("load", function(){
     const clicker = this.document.getElementById("clicker");
