@@ -18,11 +18,12 @@ window.addEventListener("load", function(){
     const upgrade3 = this.document.getElementById("upgrade3");
     const auto1 = this.document.getElementById("auto1");
     const auto2 = this.document.getElementById("auto2");
+    const auto3 = this.document.getElementById("auto3");
 
     var clickercount = 0;
     var multiplier = 1;
 
-    var bob = 0;
+    let bob = 200;
     var barbers = 0;
     let barber_cost = 1000;
     var barberWorking = false;
@@ -40,6 +41,8 @@ window.addEventListener("load", function(){
 
     function update(){
         mustache_count.innerHTML = formatNumber(mustaches);
+        auto1.innerHTML = formatNumber(bob)
+        auto2.innerHTML = formatNumber(barber_cost)
     }
 
     function auto_update(){
@@ -73,26 +76,49 @@ window.addEventListener("load", function(){
     upgrade1.addEventListener("click", function(){
         if (mustaches >= 100){
             mustaches -= 100;
-            upgrade1.style.display = "none"
+            upgrade1.style.display = "none";
             multiplier++;
         }
     });
     
     upgrade2.addEventListener("click", function(){
+        if (mustaches >= 2500) {
+            mustaches -= 2500;
+            upgrade2.style.display = "none";
+            multiplier = multiplier * 2;
+        }
     });
 
     upgrade3.addEventListener("click", function(){
+        if (mustaches >= 10000) {
+            mustaches -= 10000;
+            upgrade3.style.display = "none";
+            multiplier = multiplier * 3;
+        }
         
     });
 
     auto1.addEventListener("click", function(){
+        
+        if (mustaches >= bob) {
+            mustaches -= bob;
+            barbers = barbers + 1
+            bob = Math.floor(bob*1.5);
+            
+            update();
+        }
+        
     });
 
     auto2.addEventListener("click", function(){
+        
         if (mustaches >= barber_cost){
             mustaches -= barber_cost;
-            barbers++;
-            barber_cost = barber_cost*1.5;
+            barbers = barbers + 3;
+            barber_cost = Math.floor(barber_cost*2.5);
+
+            update();
         }
+        
     });
 });
