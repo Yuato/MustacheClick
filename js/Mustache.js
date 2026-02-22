@@ -17,16 +17,20 @@ window.addEventListener("load", function(){
     const upgrade2 = this.document.getElementById("upgrade2");
     const upgrade3 = this.document.getElementById("upgrade3");
     const auto1 = this.document.getElementById("auto1");
+    const auto1_cost_html = this.document.getElementById("auto1_cost");
     const auto2 = this.document.getElementById("auto2");
+    const auto2_cost_html = this.document.getElementById("auto2_cost");
     const auto3 = this.document.getElementById("auto3");
 
     var clickercount = 0;
     var multiplier = 1;
 
-    let bob = 200;
-    var barbers = 0;
-    let barber_cost = 1000;
-    var barberWorking = false;
+    let num_auto1 = 0;
+    let auto1_cost = 100;
+    auto1_cost_html.innerHTML = formatNumber(auto1_cost);
+    var num_auto2 = 0;
+    let auto2_cost = 1000;
+    auto2_cost_html.innerHTML = formatNumber(auto2_cost);
     
     var clickerUpgradeScore = 0;
 
@@ -39,45 +43,39 @@ window.addEventListener("load", function(){
         return num.toLocaleString(); 
     }
 
-    function update(){
+    function mustache_update(){
         mustache_count.innerHTML = formatNumber(mustaches);
-        auto1.innerHTML = formatNumber(bob)
-        auto2.innerHTML = formatNumber(barber_cost)
     }
 
-    function auto_update(){
-        barberCutMustache();
-        bobCutMustache();
-        update();
+    function upgrades_update() {
+        mustaches += (num_auto1 * multiplier);
+        mustaches += (num_auto2 * 3 * multiplier);
     }
 
-    this.setInterval(auto_update, 1000);
+    function interval_update(){
+        upgrades_update()
+        mustache_update();
+    }
+
+    this.setInterval(interval_update, 1000);
 
     //Main clicker
     clicker.addEventListener("click", function(){
-        cutMustache();
+        clickMustache();
     });
 
     /*This controls the clicker*/
-    function cutMustache() {
+    function clickMustache() {
         clickercount++;
         mustaches = mustaches + multiplier;
-        update();
-    }
-
-    function bobCutMustache() {
-        mustaches = mustaches + (barbers * multiplier);
-    }
-
-    function barberCutMustache() {
-        mustaches = mustaches + (barbers * multiplier);
+        mustache_update();
     }
 
     upgrade1.addEventListener("click", function(){
         if (mustaches >= 100){
             mustaches -= 100;
             upgrade1.style.display = "none";
-            multiplier++;
+            multiplier = multiplier * 2;
         }
     });
     
@@ -85,7 +83,7 @@ window.addEventListener("load", function(){
         if (mustaches >= 2500) {
             mustaches -= 2500;
             upgrade2.style.display = "none";
-            multiplier = multiplier * 2;
+            multiplier = multiplier * 3;
         }
     });
 
@@ -93,31 +91,31 @@ window.addEventListener("load", function(){
         if (mustaches >= 10000) {
             mustaches -= 10000;
             upgrade3.style.display = "none";
-            multiplier = multiplier * 3;
+            multiplier = multiplier * 5;
         }
         
     });
 
     auto1.addEventListener("click", function(){
         
-        if (mustaches >= bob) {
-            mustaches -= bob;
-            barbers = barbers + 1
-            bob = Math.floor(bob*1.5);
+        if (mustaches >= auto1_cost) {
+            mustaches -= auto1_cost;
+            num_auto1++;
+            auto1_cost = Math.floor(auto1_cost*1.5);
             
-            update();
+            auto1_cost_html.innerHTML = formatNumber(auto1_cost);
         }
         
     });
 
     auto2.addEventListener("click", function(){
         
-        if (mustaches >= barber_cost){
-            mustaches -= barber_cost;
-            barbers = barbers + 3;
-            barber_cost = Math.floor(barber_cost*2.5);
+        if (mustaches >= auto2_cost){
+            mustaches -= auto2_cost;
+            num_auto2++;
+            auto2_cost = Math.floor(auto2_cost*1.5);
 
-            update();
+            auto2_cost_html.innerHTML = formatNumber(auto2_cost);
         }
         
     });
