@@ -21,6 +21,9 @@ window.addEventListener("load", function(){
     const auto2 = this.document.getElementById("auto2");
     const auto2_cost_html = this.document.getElementById("auto2_cost");
     const auto3 = this.document.getElementById("auto3");
+    const helpBtn = this.document.getElementById("openBtn");
+    const helpMenu = document.getElementById("help_section");
+    const closeHelp = document.getElementById("closeHelp");
 
     var clickercount = 0;
     var multiplier = 1;
@@ -118,5 +121,17 @@ window.addEventListener("load", function(){
             auto2_cost_html.innerHTML = formatNumber(auto2_cost);
         }
         
+    });
+
+    helpBtn.addEventListener("click", function(){
+        if (helpMenu.style.display === "none") {
+                helpMenu.style.display = "block";
+        } else {
+                helpMenu.style.display = "none";
+        }
+    });
+
+    closeHelp.addEventListener("click", function() {
+    helpMenu.style.display = "none";
     });
 });
