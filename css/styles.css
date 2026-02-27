@@ -20,16 +20,31 @@ html{
     height: 98vh;
     font-family: 'Courier New', Courier, monospace;
 
-    border: 2px black solid;
     overflow-y: auto;
 }
 
 #header{
     height: 5%;
+
+    display: flex;
+    align-items: center;     
+    justify-content: center;  
+    position: relative;
+
+    background-color: white;
+}
+
+#header h1{
+    display: inline;
 }
 
 h1{
     text-align: center;
+}
+
+#help_header{
+    right:10px;
+    position:absolute;
 }
 
 #content {
@@ -52,7 +67,21 @@ h1{
 }
 
 #clicker img{
-    max-width:100%;
+    width:100%;
+}
+
+#upgrade1Icon{
+    visibility: hidden;
+}
+
+#upgrade2Icon{
+    visibility: hidden;
+}
+#upgrade3Icon{
+    visibility: hidden;
+}
+#upgrade4Icon{
+    visibility: hidden;
 }
 
 #upgrades_area{

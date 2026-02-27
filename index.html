@@ -14,66 +14,80 @@ File Created Date: Sat Feb 13 2026
     </head>
     <body>
         <div id="container">
+
             <div id="header"> 
-                <h1>Mustache clicker</h1>
+                <h1 id = "Title">Mustache Clicker</h1>
+
+                <div id="help_header">
+                    <img src="images/helpButton.jpeg" id="openBtn" width="50">
+                </div>
+
+                <div id="help_section">
+                    <button id="closeHelp">X</button>
+                    <h2>Instructions</h2>
+                    <p>Who doesn't love mustaches? Start by clicking the mustache icon to cut and gain mustaches!</p>
+
+                    <h3>Upgrades</h3>
+                    <p>
+                        Upgrades multiplier your click value, the more expensive the upgrade, the higher the multiplier!
+                    </p>
+                    <p>Upgrades available:</p>
+                    <ul>
+                        <li>Bronze Scissors</li>
+                        <li>Silver Scissors</li>
+                        <li>Gold Scissors</li>
+                    </ul>
+
+                    <h3>Auto Upgrades</h3>
+                    <p>Auto upgrades increase your mustache value after a certain period of time automatically. 
+                        Purchasing auto upgrades increases the amount of mustache gain!
+
+                    </p>
+                    <ul>
+                        <li>Bob</li>
+                        <li>Barber</li>
+                        <li>Electric Razor</li>
+                    </ul>
+
+                    <h3>Rewards</h3>
+                    <p>Milestones received for playing the game! Good luck finding and getting them all!</p>
+                </div>
             </div>
-
-            <div id="nav">
-            </div>
-
-            
-            <div id="help_header">
-                <img src="images/helpButton.jpeg" id="openBtn" width="50">
-                <strong>Click the icon for help!</strong>
-            </div>
-
-            <div id="help_section">
-            <button id="closeHelp">Close X</button>
-            <h2>Instructions</h2>
-            <p>Click the mustache to get points! Buy upgrades to go faster.</p>
-
-            <h3>Upgrades</h3>
-            <ul>
-                <li>Bronze Scissors: 100</li>
-                <li>Silver Scissors: 2,500</li>
-                <li>Gold Scissors: 10,000</li>
-            </ul>
-
-            <h3>Auto Upgrades</h3>
-            <ul>
-                <li>Bob</li>
-                <li>Barber</li>
-                <li>Electric Razor</li>
-            </ul>
-
-            <h3>Rewards</h3>
-            <p>1 Million Mustaches = Golden Mustache!</p>
-        </div>
-        
-            
 
             <div id="content">
                 <div id = "clicker_area">
                     <span>Mustaches:</span>
                     <span id = "mustaches">0</span>
                     <br>
-                    <img src = "images/Mustache.png" id = "clicker" draggable="false">
+                    <img src = "images/Mustache.png" id = "clicker" draggable="false" title = "CLICK ME">
+                    <div id = "upgrades_owned">
+                        <h3>Your Upgrades:</h3>
+                        <img src = "images/upgrade1_icon.png" id = "upgrade1Icon" draggable="false" title = "School Scissors Upgrade">
+                        <img src = "images/upgrade2_icon.png" id = "upgrade2Icon" draggable="false">
+                        <img src = "images/upgrade3_icon.png" id = "upgrade3Icon" draggable="false">
+                        <img src = "images/upgrade4_icon.png" id = "upgrade4Icon" draggable="false">
+                        <h3>Your Auto Upgrades:</h3>
+                    </div>
                 </div>
                 
                 <div id = "upgrades_area">
                     <div class = "upgrades_section">
                         <h1>Upgrades</h1>
                         <div class = "upgrades" id = "upgrade1">
-                            <h2>Bronze scissors</h2>
+                            <h2>School scissors</h2>
                             <h3>Cost: 100</h3>
                         </div>
                         <div class = "upgrades" id = "upgrade2">
                             <h2>Silver Scissors</h2>
-                            <h3>Cost: 2500</h3>
+                            <h3>Cost: 2,500</h3>
                         </div>
                         <div class = "upgrades" id = "upgrade3">
                             <h2>Gold Scissors</h2>
-                            <h3>Cost: 10000</h3>
+                            <h3>Cost: 10,000</h3>
+                        </div>
+                        <div class = "upgrades" id = "upgrade4">
+                            <h2>Rainbow Scissors</h2>
+                            <h3>Cost: 100,000</h3>
                         </div>
                     </div>
 
