@@ -41,6 +41,11 @@ window.addEventListener("load", function(){
     const helpMenu = docElemId("help_section");
     const closeHelp = docElemId("closeHelp");
 
+    let rewards = [];
+    for (let i = 1; i <= 5; i++){
+        rewards[i] = docElemId("reward" + i);
+    }
+
     var clickercount = 0;
     var multiplier = 1;
 
@@ -61,7 +66,7 @@ window.addEventListener("load", function(){
         return num.toLocaleString(); 
     }
 
-    function mustache_update(){
+    function event_update(){
         mustache_count.innerHTML = formatNumber(mustaches);
     }
 
@@ -72,7 +77,7 @@ window.addEventListener("load", function(){
 
     function interval_update(){
         upgrades_update()
-        mustache_update();
+        event_update();
     }
 
     this.setInterval(interval_update, 1000);
@@ -86,7 +91,7 @@ window.addEventListener("load", function(){
     function clickMustache() {
         clickercount++;
         mustaches = mustaches + multiplier;
-        mustache_update();
+        event_update();
     }
 
     for (let i = 1; i<=4; i++){
