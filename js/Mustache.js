@@ -2,9 +2,13 @@
 Author: Omar Siyad and Tony Yuan
 File Created Date: Sat Feb 14th 2026
 Purpose:
-    -Contains 
-    -
-    -
+    - mustache_update() updates the current amount of mustaches
+    - formatNumber() is a helper function meant for conversion when a number exceeds to a million
+    - upgrade_update() incoporates the amount of workers and increases the click value based on the number of workers
+    - interval_update() updates both mustache_update() and upgrade_update() per second
+    - clickMustache() controls how much mustache is gain per click and uses mustache_update()
+    - auto1, auto2 increases the amount of workers, and while substracting the current amount of mustaches, their respective value increases for each purchase
+    - helpBtn opens a menu to the user to display the main purpose of the game and the controls
 */
 
 var mustaches = 0;
