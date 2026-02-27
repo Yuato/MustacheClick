@@ -9,21 +9,37 @@ Purpose:
 
 var mustaches = 0;
 
+class Upgrade{
+    constructor (element, icon, cost, multiplier){
+        this.element = element;
+        this.icon = icon;
+        this.cost = cost;
+        this.multiplier = multiplier
+    }
+}
 
 window.addEventListener("load", function(){
-    const clicker = this.document.getElementById("clicker");
-    const mustache_count = this.document.getElementById("mustaches")
-    const upgrade1 = this.document.getElementById("upgrade1");
-    const upgrade2 = this.document.getElementById("upgrade2");
-    const upgrade3 = this.document.getElementById("upgrade3");
-    const auto1 = this.document.getElementById("auto1");
-    const auto1_cost_html = this.document.getElementById("auto1_cost");
-    const auto2 = this.document.getElementById("auto2");
-    const auto2_cost_html = this.document.getElementById("auto2_cost");
+    function docElemId(id){
+        return this.document.getElementById(id);
+    }
+
+    const clicker = docElemId("clicker");
+    const mustache_count = docElemId("mustaches")
+
+    let upgrade = [];
+    upgrade[1] = new Upgrade(docElemId("upgrade1"), docElemId("upgrade1Icon"), 100, 2);
+    upgrade[2] = new Upgrade(docElemId("upgrade2"), docElemId("upgrade2Icon"), 2500, 3);
+    upgrade[3] = new Upgrade(docElemId("upgrade3"), docElemId("upgrade3Icon"), 10000, 5);
+    upgrade[4] = new Upgrade(docElemId("upgrade4"), docElemId("upgrade4Icon"), 100000, 10);
+
+    const auto1 = docElemId("auto1");
+    const auto1_cost_html = docElemId("auto1_cost");
+    const auto2 = docElemId("auto2");
+    const auto2_cost_html = docElemId("auto2_cost");
     const auto3 = this.document.getElementById("auto3");
-    const helpBtn = this.document.getElementById("openBtn");
-    const helpMenu = document.getElementById("help_section");
-    const closeHelp = document.getElementById("closeHelp");
+    const helpBtn = docElemId("openBtn");
+    const helpMenu = docElemId("help_section");
+    const closeHelp = docElemId("closeHelp");
 
     var clickercount = 0;
     var multiplier = 1;
@@ -42,7 +58,6 @@ window.addEventListener("load", function(){
         if (num >= 1000000000000) return (num / 1000000000000).toFixed(2) + "T";
         if (num >= 1000000000) return (num / 1000000000).toFixed(2) + "B";
         if (num >= 1000000) return (num / 1000000).toFixed(2) + "M";
-        if (num >= 1000) return (num / 1000).toFixed(2) + "K";
         return num.toLocaleString(); 
     }
 
@@ -74,30 +89,16 @@ window.addEventListener("load", function(){
         mustache_update();
     }
 
-    upgrade1.addEventListener("click", function(){
-        if (mustaches >= 100){
-            mustaches -= 100;
-            upgrade1.style.display = "none";
-            multiplier = multiplier * 2;
-        }
-    });
-    
-    upgrade2.addEventListener("click", function(){
-        if (mustaches >= 2500) {
-            mustaches -= 2500;
-            upgrade2.style.display = "none";
-            multiplier = multiplier * 3;
-        }
-    });
-
-    upgrade3.addEventListener("click", function(){
-        if (mustaches >= 10000) {
-            mustaches -= 10000;
-            upgrade3.style.display = "none";
-            multiplier = multiplier * 5;
-        }
-        
-    });
+    for (let i = 1; i<=4; i++){
+        upgrade[i].element.addEventListener("click", function(){
+            if (mustaches >= upgrade[i].cost){
+                upgrade[i].element.style.display = "none";
+                upgrade[i].icon.style.visibility = "visible";
+                mustaches -= upgrade[i].cost;
+                multiplier = multiplier * upgrade[i].multiplier;
+            }
+        });
+    }
 
     auto1.addEventListener("click", function(){
         
@@ -126,12 +127,13 @@ window.addEventListener("load", function(){
     helpBtn.addEventListener("click", function(){
         if (helpMenu.style.display === "none") {
                 helpMenu.style.display = "block";
-        } else {
+        } 
+        else {
                 helpMenu.style.display = "none";
         }
     });
 
     closeHelp.addEventListener("click", function() {
-    helpMenu.style.display = "none";
+        helpMenu.style.display = "none";
     });
 });
