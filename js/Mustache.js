@@ -34,9 +34,11 @@ class Reward{
 }
 
 window.addEventListener("load", function(event){
-    /*Substitute for getElementById
+    /**  
+     * Substitute for getElementById
      * @param {string} id - The ID of the element to retrieve
-     * @returns The matching DOM element*/
+     * @returns The matching DOM element
+     */
     function docElemId(id){
         return this.document.getElementById(id);
     }
