@@ -3,7 +3,7 @@ Author: Omar Siyad and Tony Yuan
 File Created Date: Sat Feb 14th 2026*/
 
 var mustaches = 0;
-
+/**/
 class Upgrade{
     constructor (element, icon, cost, multiplier){
         this.element = element;
@@ -34,7 +34,9 @@ class Reward{
 }
 
 window.addEventListener("load", function(event){
-    /*A helper function that serves as a substitute for getElementById("id")*/
+    /*Substitute for getElementById
+     * @param {string} id - The ID of the element to retrieve
+     * @returns The matching DOM element*/
     function docElemId(id){
         return this.document.getElementById(id);
     }
