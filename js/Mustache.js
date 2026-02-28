@@ -198,6 +198,10 @@ window.addEventListener("load", function(event){
         });
     }
 
+    /**  
+     * Adds congratulation message for rewards when achieved
+     * @param {integer} num - The reward number to identify which award
+     */
     function congratulations(num){
         rewards[num].element.style.display = "none"; 
         congrats.forEach(elem => {
