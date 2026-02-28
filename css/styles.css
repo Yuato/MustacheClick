@@ -75,6 +75,10 @@ h1{
 #clicker {
     width: 200px;
     cursor: pointer;
+    transition: transform 0.2s ease;
+}
+#clicker:active {
+    transform: scale(0.9);
 }
 
 #content {
@@ -96,9 +100,7 @@ h1{
     background-color: lightblue;
 }
 
-#clicker img{
-    width:100%;
-}
+
 
 #upgrade1Icon{
     visibility: hidden;
