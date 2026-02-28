@@ -1,6 +1,8 @@
 /*
 Author: Omar Siyad and Tony Yuan
-File Created Date: Sat Feb 14th 2026*/
+File Created Date: Sat Feb 14th 202
+JavaScript file that controls all interactive elements
+*/
 
 var mustaches = 0;
 /**/
