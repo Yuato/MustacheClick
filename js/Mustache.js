@@ -1,15 +1,6 @@
 /*
 Author: Omar Siyad and Tony Yuan
-File Created Date: Sat Feb 14th 2026
-Purpose:
-    - mustache_update() updates the current amount of mustaches
-    - formatNumber() is a helper function meant for conversion when a number exceeds to a million
-    - upgrade_update() incoporates the amount of workers and increases the click value based on the number of workers
-    - interval_update() updates both mustache_update() and upgrade_update() per second
-    - clickMustache() controls how much mustache is gain per click and uses mustache_update()
-    - auto1, auto2 increases the amount of workers, and while substracting the current amount of mustaches, their respective value increases for each purchase
-    - helpBtn opens a menu to the user to display the main purpose of the game and the controls
-*/
+File Created Date: Sat Feb 14th 2026*/
 
 var mustaches = 0;
 
@@ -84,17 +75,17 @@ window.addEventListener("load", function(event){
         if (num >= 1000000) return (num / 1000000).toFixed(2) + "M";
         return num.toLocaleString(); 
     }
-
+    /*updates the current amount of mustaches*/
     function event_update(){
         mustache_count.innerHTML = formatNumber(mustaches);
     }
-
+    /*incoporates the amount of workers and increases the click value based on the number of workers*/
     function upgrades_update() {
         for (let i = 1; i <= 3; i++){
             mustaches += (autoUpgrades[i].value * autoUpgrades[i].amount *multiplier);
         }
     }
-
+    /*updates both mustache_update() and upgrade_update() per second*/
     function interval_update(){
         upgrades_update()
         event_update();
@@ -117,7 +108,7 @@ window.addEventListener("load", function(event){
     function background(elem, color){
         elem.style.backgroundColor = color;
     };
-
+    /* upgrades increases the amount of clicks gained per click*/
     for (let i = 1; i<=4; i++){
         upgrade[i].element.addEventListener("click", function(){
             if (mustaches >= upgrade[i].cost){
@@ -133,7 +124,7 @@ window.addEventListener("load", function(event){
             }
         });
     }
-
+    /* autoUpgrades increases the amount of workers, and while substracting the current amount of mustaches, their respective value increases for each purchase*/
     for (let i = 1; i <=3; i++){
         autoUpgrades[i].element.addEventListener("click", function(){
             if (mustaches >= autoUpgrades[i].cost){
@@ -152,7 +143,7 @@ window.addEventListener("load", function(event){
             }
         });
     }
-
+   /*helpBtn opens a menu to the user to display the main purpose of the game and the controls*/
     helpBtn.addEventListener("click", function(){
         if (helpMenu.style.display === "none") {
                 helpMenu.style.display = "block";
@@ -161,7 +152,7 @@ window.addEventListener("load", function(event){
                 helpMenu.style.display = "none";
         }
     });
-
+    /*closeHelp */
     closeHelp.addEventListener("click", function() {
         helpMenu.style.display = "none";
     });
