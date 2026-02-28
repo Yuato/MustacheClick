@@ -124,7 +124,7 @@ window.addEventListener("load", function(event){
         mustache_count.innerHTML = formatNumber(mustaches);
         checkReward(1, true, rewards[1].obtained);
         checkReward(2, (mustaches >= 1000000), rewards[2].obtained);
-        checkReward(3,  (clickercount >= 1), rewards[3].obtained);
+        checkReward(3,  (mustaches >= 100000), rewards[3].obtained);
         checkReward(4, (clickerUpgradeScore >= 1), rewards[4].obtained);
         checkReward(5, (clickerUpgradeScore >= 7), rewards[5].obtained);
 
