@@ -18,11 +18,22 @@ class Upgrade{
         this.element = element;
         this.icon = icon;
         this.cost = cost;
-        this.multiplier = multiplier
+        this.multiplier = multiplier;
     }
 }
 
-window.addEventListener("load", function(){
+class AutoUpgrade{
+    constructor (element, elementCost, value, amount, cost){
+        this.element = element;
+        this.elementCost = elementCost;
+        this.value = value;
+        this.amount = amount
+        this.cost = cost;
+        this.bought = false;
+    }
+}
+
+window.addEventListener("load", function(event){
     function docElemId(id){
         return this.document.getElementById(id);
     }
@@ -36,11 +47,23 @@ window.addEventListener("load", function(){
     upgrade[3] = new Upgrade(docElemId("upgrade3"), docElemId("upgrade3Icon"), 10000, 5);
     upgrade[4] = new Upgrade(docElemId("upgrade4"), docElemId("upgrade4Icon"), 100000, 10);
 
-    const auto1 = docElemId("auto1");
-    const auto1_cost_html = docElemId("auto1_cost");
-    const auto2 = docElemId("auto2");
-    const auto2_cost_html = docElemId("auto2_cost");
-    const auto3 = this.document.getElementById("auto3");
+    let autoUpgrades = [];
+    let autoElem = docElemId("auto1");
+    let autoCost = docElemId("auto1_cost");
+    autoUpgrades[1] = new AutoUpgrade(autoElem, autoCost, 1, 0, 100);
+
+    autoElem = docElemId("auto2");
+    autoCost = docElemId("auto2_cost");
+    autoUpgrades[2] = new AutoUpgrade(autoElem, autoCost, 3, 0, 500);
+
+    autoElem = docElemId("auto3");
+    autoCost = docElemId("auto3_cost");
+    autoUpgrades[3] = new AutoUpgrade(autoElem, autoCost, 5, 0, 1000);
+    
+    for (let i = 1; i<= 3; i++){
+        autoUpgrades[i].elementCost.innerHTML = autoUpgrades[i].cost;
+    }
+
     const helpBtn = docElemId("openBtn");
     const helpMenu = docElemId("help_section");
     const closeHelp = docElemId("closeHelp");
@@ -49,17 +72,9 @@ window.addEventListener("load", function(){
     for (let i = 1; i <= 5; i++){
         rewards[i] = docElemId("reward" + i);
     }
-
+    
     var clickercount = 0;
     var multiplier = 1;
-
-    let num_auto1 = 0;
-    let auto1_cost = 100;
-    auto1_cost_html.innerHTML = formatNumber(auto1_cost);
-    var num_auto2 = 0;
-    let auto2_cost = 1000;
-    auto2_cost_html.innerHTML = formatNumber(auto2_cost);
-    
     var clickerUpgradeScore = 0;
 
     /*This is a helper function meant for changing numbers like thousands and millions into smaller numbers with letters*/
@@ -75,8 +90,9 @@ window.addEventListener("load", function(){
     }
 
     function upgrades_update() {
-        mustaches += (num_auto1 * multiplier);
-        mustaches += (num_auto2 * 3 * multiplier);
+        for (let i = 1; i <= 3; i++){
+            mustaches += (autoUpgrades[i].value * autoUpgrades[i].amount *multiplier);
+        }
     }
 
     function interval_update(){
@@ -98,6 +114,10 @@ window.addEventListener("load", function(){
         event_update();
     }
 
+    function background(elem, color){
+        elem.style.backgroundColor = color;
+    };
+
     for (let i = 1; i<=4; i++){
         upgrade[i].element.addEventListener("click", function(){
             if (mustaches >= upgrade[i].cost){
@@ -105,33 +125,33 @@ window.addEventListener("load", function(){
                 upgrade[i].icon.style.visibility = "visible";
                 mustaches -= upgrade[i].cost;
                 multiplier = multiplier * upgrade[i].multiplier;
+                clickerUpgradeScore++;
+            }
+            else{
+                background(upgrade[i].element, "red");
+                setTimeout(() => background(upgrade[i].element, "lightgrey"), 1000);
             }
         });
     }
 
-    auto1.addEventListener("click", function(){
-        
-        if (mustaches >= auto1_cost) {
-            mustaches -= auto1_cost;
-            num_auto1++;
-            auto1_cost = Math.floor(auto1_cost*1.5);
-            
-            auto1_cost_html.innerHTML = formatNumber(auto1_cost);
-        }
-        
-    });
-
-    auto2.addEventListener("click", function(){
-        
-        if (mustaches >= auto2_cost){
-            mustaches -= auto2_cost;
-            num_auto2++;
-            auto2_cost = Math.floor(auto2_cost*1.5);
-
-            auto2_cost_html.innerHTML = formatNumber(auto2_cost);
-        }
-        
-    });
+    for (let i = 1; i <=3; i++){
+        autoUpgrades[i].element.addEventListener("click", function(){
+            if (mustaches >= autoUpgrades[i].cost){
+                mustaches -= autoUpgrades[i].cost;
+                autoUpgrades[i].amount++;
+                autoUpgrades[i].cost = Math.floor(autoUpgrades[i].cost*1.5);
+                autoUpgrades[i].elementCost.innerHTML = formatNumber(autoUpgrades[i].cost);
+                if (autoUpgrades[i].bought === false){
+                    clickerUpgradeScore++;
+                    autoUpgrades[i].bought = true;
+                }
+            }
+            else{
+                background(upgrade[i].element, "red");
+                setTimeout(() => background(upgrade[i].element, "lightgrey"), 1000);
+            }
+        });
+    }
 
     helpBtn.addEventListener("click", function(){
         if (helpMenu.style.display === "none") {
