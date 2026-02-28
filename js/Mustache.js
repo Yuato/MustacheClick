@@ -24,6 +24,14 @@ class AutoUpgrade{
     }
 }
 
+class Reward{
+    constructor (element, icon, obtained){
+        this.element = element;
+        this.icon = icon;
+        this.obtained = obtained;
+    }
+}
+
 window.addEventListener("load", function(event){
     /*A helper function that serves as a substitute for getElementById("id")*/
     function docElemId(id){
@@ -62,7 +70,8 @@ window.addEventListener("load", function(event){
 
     let rewards = [];
     for (let i = 1; i <= 5; i++){
-        rewards[i] = docElemId("reward" + i);
+        let icon = docElemId("reward" + i +"Icon");
+        rewards[i] = new Reward(docElemId("reward" + i), icon, false);
     }
     
     var clickercount = 0;
@@ -95,6 +104,11 @@ window.addEventListener("load", function(event){
     /*updates the current amount of mustaches*/
     function event_update(){
         mustache_count.innerHTML = formatNumber(mustaches);
+        checkReward(1, true, rewards[1].obtained);
+        checkReward(2, (mustaches >= 1000000), rewards[2].obtained);
+        checkReward(3,  (clickercount >= 100000), rewards[3].obtained);
+        checkReward(4, (clickerUpgradeScore >= 1), rewards[4].obtained);
+        checkReward(5, (clickerUpgradeScore >= 7), rewards[5].obtained);
     }
 
     /*incoporates the amount of workers and increases the click value based on the number of workers*/
@@ -160,5 +174,17 @@ window.addEventListener("load", function(event){
             }
         });
     }
+
+    function checkReward(num, condition, obtained){
+        if (condition && obtained === false){
+            rewards[num].icon.style.visibility = "visible";
+            rewards[num].obtained = true;
+
+            rewards[num].element.style.display = "block";
+            setTimeout(() => rewards[num].element.style.display = "none", 10000);
+        }
+    };
+
+
 
 });

@@ -205,4 +205,29 @@ h1{
     visibility: hidden;
 }
 
+#reward1{
+    display: none;
+    background-color: lightyellow;
+}
+
+#reward2{
+    display: none;
+    background-color: lightyellow;
+}
+
+#reward3{
+    display: none;
+    background-color: lightyellow;
+}
+
+#reward4{
+    display: none;
+    background-color: lightyellow;
+}
+
+#reward5{
+    display: none;
+    background-color: lightyellow;
+}
+
 
