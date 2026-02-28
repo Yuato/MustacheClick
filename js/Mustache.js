@@ -25,6 +25,7 @@ class AutoUpgrade{
 }
 
 window.addEventListener("load", function(event){
+    /*A helper function that serves as a substitute for getElementById("id")*/
     function docElemId(id){
         return this.document.getElementById(id);
     }
