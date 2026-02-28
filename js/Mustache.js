@@ -42,6 +42,7 @@ window.addEventListener("load", function(event){
     const clicker = docElemId("clicker");
     const mustache_count = docElemId("mustaches")
     const autoSpeed = docElemId("auto_speed");
+    const congrats = document.querySelectorAll(".congrats");
 
     let upgrade = [];
     upgrade[1] = new Upgrade(docElemId("upgrade1"), docElemId("upgrade1Icon"), 100, 2);
@@ -111,7 +112,7 @@ window.addEventListener("load", function(event){
         mustache_count.innerHTML = formatNumber(mustaches);
         checkReward(1, true, rewards[1].obtained);
         checkReward(2, (mustaches >= 1000000), rewards[2].obtained);
-        checkReward(3,  (clickercount >= 100000), rewards[3].obtained);
+        checkReward(3,  (clickercount >= 1), rewards[3].obtained);
         checkReward(4, (clickerUpgradeScore >= 1), rewards[4].obtained);
         checkReward(5, (clickerUpgradeScore >= 7), rewards[5].obtained);
 
@@ -192,14 +193,25 @@ window.addEventListener("load", function(event){
             }
         });
     }
+
+    function congratulations(num){
+        rewards[num].element.style.display = "none"; 
+        congrats.forEach(elem => {
+                elem.style.display = "none";
+            });
+    }
+    
     /* checks if the condition of the reward passes before giving the user the achievement*/
     function checkReward(num, condition, obtained){
         if (condition && obtained === false){
             rewards[num].icon.style.visibility = "visible";
             rewards[num].obtained = true;
-
+            
+            congrats.forEach(elem => {
+                elem.style.display = "block";
+            });
             rewards[num].element.style.display = "block";
-            setTimeout(() => rewards[num].element.style.display = "none", 10000);
+            setTimeout(() => congratulations(num), 10000);
         }
     };
 

@@ -100,8 +100,6 @@ h1{
     background-color: lightblue;
 }
 
-
-
 #upgrade1Icon{
     visibility: hidden;
 }
@@ -205,6 +203,10 @@ h1{
 
 #reward5Icon{
     visibility: hidden;
+}
+
+.congrats{
+    display: none;
 }
 
 #reward1{
