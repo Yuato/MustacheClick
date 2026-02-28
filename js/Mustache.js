@@ -4,8 +4,6 @@ File Created Date: Sat Feb 14th 202
 JavaScript file that controls all interactive elements
 */
 
-var mustaches = 0;
-/**/
 class Upgrade{
     constructor (element, icon, cost, multiplier){
         this.element = element;
@@ -45,6 +43,7 @@ window.addEventListener("load", function(event){
         return this.document.getElementById(id);
     }
 
+    var mustaches = 0;
     const clicker = docElemId("clicker");
     const mustache_count = docElemId("mustaches")
     const autoSpeed = docElemId("auto_speed");
