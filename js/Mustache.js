@@ -86,7 +86,9 @@ window.addEventListener("load", function(event){
     var multiplier = 1;
     var clickerUpgradeScore = 0;
 
-    /*helpBtn opens a menu to the user to display the main purpose of the game and the controls*/
+    /*Toggles the help menu open or closed
+      @listens click
+      @param {MouseEvent} - Click on the help button*/
     helpBtn.addEventListener("click", function(){
         if (helpMenu.style.display === "none") {
                 helpMenu.style.display = "block";
@@ -96,12 +98,17 @@ window.addEventListener("load", function(event){
         }
     });
 
-    /*closeHelp closes the help menu*/
+    /*Closes the help menu
+ 
+     @listens click
+     @param {MouseEvent} - Click on the close button*/
     closeHelp.addEventListener("click", function() {
         helpMenu.style.display = "none";
     });
 
-    /*This is a helper function meant for changing numbers like thousands and millions into smaller numbers with letters*/
+    /*Shortens large numbers
+    @param {Number} num - The number to format
+    @returns Formatted string (e.g. 1000000 → "1.00M")*/
     function formatNumber(num) {
         if (num >= 1000000000000) return (num / 1000000000000).toFixed(2) + "T";
         if (num >= 1000000000) return (num / 1000000000).toFixed(2) + "B";
@@ -141,19 +148,28 @@ window.addEventListener("load", function(event){
 
     this.setInterval(interval_update, 1000);
 
-    //Main clicker
+    /*Increments mustache count by current multiplier on each click
+    
+     @listens click
+     @param {MouseEvent} - Click on the main clicker image*/
     clicker.addEventListener("click", function(){
         clickercount++;
         mustaches = mustaches + multiplier;
         event_update();
     });
 
-
+    /*Changes background color of an element
+     @param {HTMLElement} elem - The DOM element to recolor
+     @param {string} color - The background color to apply*/
     function background(elem, color){
         elem.style.backgroundColor = color;
     };
 
-    /* upgrades increases the amount of clicks gained per click*/
+    /*Purchases a clicker upgrade if enough mustaches, increases multiplier
+    
+     Flashes red if insufficient funds
+     @listens click
+     @param {MouseEvent} - Click on upgrade[i] button*/
     for (let i = 1; i<=4; i++){
         upgrade[i].element.addEventListener("click", function(){
             if (mustaches >= upgrade[i].cost){
@@ -172,7 +188,11 @@ window.addEventListener("load", function(event){
         });
     }
     
-    /* autoUpgrades increases the amount of workers, and while substracting the current amount of mustaches, their respective value increases for each purchase*/
+    /*Purchases an auto upgrade if enough mustaches, increases worker count and cost
+    
+     Flashes red if mustaches are too low
+     @listens click
+     @param {MouseEvent} - Click on autoUpgrades[i] button*/
     for (let i = 1; i <=3; i++){
         autoUpgrades[i].element.addEventListener("click", function(){
             if (mustaches >= autoUpgrades[i].cost){
@@ -195,15 +215,20 @@ window.addEventListener("load", function(event){
             }
         });
     }
-
+    /*Hides reward popup and congratulation message
+    
+    @param {Number} num - Index of the reward to hide*/
     function congratulations(num){
         rewards[num].element.style.display = "none"; 
         congrats.forEach(elem => {
                 elem.style.display = "none";
             });
     }
-
-    /* checks if the condition of the reward passes before giving the user the achievement*/
+    /*Check if condition passes then gives the reward
+    
+     @param {Number} num - Index of the reward to check
+     @param {Boolean} condition - Whether the unlock condition is met
+     @param {Boolean} obtained - Whether the reward was already granted*/
     function checkReward(num, condition, obtained){
         if (condition && obtained === false){
             rewards[num].icon.style.visibility = "visible";
@@ -216,11 +241,19 @@ window.addEventListener("load", function(event){
             setTimeout(() => congratulations(num), 10000);
         }
     };
-
+    
     for (let i = 1; i < 6; i++){
+        /*Shows the reward popup tooltip on hover
+ 
+         @listens mouseover
+         @param {MouseEvent} - Mouse enters rewards[i] icon*/
         rewards[i].icon.addEventListener("mouseover", function(){
             rewards[i].element.style.display = "block";
         });
+        /*Hides the reward popup tooltip on mouse leave
+ 
+         @listens mouseout
+         @param {MouseEvent} - Mouse leaves rewards[i] icon*/
         rewards[i].icon.addEventListener("mouseout", function(){
             rewards[i].element.style.display = "none";
         });
