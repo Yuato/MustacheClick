@@ -88,7 +88,7 @@ window.addEventListener("load", function(event){
         }
     });
 
-    /*closeHelp */
+    /*closeHelp closes the help menu*/
     closeHelp.addEventListener("click", function() {
         helpMenu.style.display = "none";
     });
@@ -174,7 +174,7 @@ window.addEventListener("load", function(event){
             }
         });
     }
-
+    /* checks if the condition of the reward passes before giving the user the achievement*/
     function checkReward(num, condition, obtained){
         if (condition && obtained === false){
             rewards[num].icon.style.visibility = "visible";
