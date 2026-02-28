@@ -200,7 +200,7 @@ window.addEventListener("load", function(event){
                 elem.style.display = "none";
             });
     }
-    
+
     /* checks if the condition of the reward passes before giving the user the achievement*/
     function checkReward(num, condition, obtained){
         if (condition && obtained === false){
