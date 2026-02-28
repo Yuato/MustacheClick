@@ -47,6 +47,36 @@ h1{
     position:absolute;
 }
 
+#help_section {
+    background-color: #ffffff;
+    border: 2px solid #000;
+    padding: 15px;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    width: 250px;
+    z-index: 10; 
+    display: none;
+}
+
+#openBtn {
+    width: "50";
+    background:transparent; 
+    cursor:pointer;
+    display:inline-block;
+}
+
+#closeHelp {
+    float: right;
+    cursor: pointer;
+    background-color: #ffcccc;
+}
+
+#clicker {
+    width: 200px;
+    cursor: pointer;
+}
+
 #content {
     height: 93%;
     
@@ -145,32 +175,34 @@ h1{
 }
 
 
-#help_section {
-    background-color: #ffffff;
-    border: 2px solid #000;
-    padding: 15px;
-    position: absolute;
-    top: 60px;
-    left: 20px;
-    width: 250px;
-    z-index: 10; 
-    display: none;
+#reward_icons{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-#openBtn {
-    width: "50";
-    background:transparent; 
-    cursor:pointer;
-    display:inline-block;
+#reward_icons p{
+    font-size:50px;
 }
 
-#closeHelp {
-    float: right;
-    cursor: pointer;
-    background-color: #ffcccc;
+#reward1Icon{
+    visibility: hidden;
 }
 
-#clicker {
-    width: 200px;
-    cursor: pointer;
+#reward2Icon{
+    visibility: hidden;
 }
+
+#reward3Icon{
+    visibility: hidden;
+}
+
+#reward4Icon{
+    visibility: hidden;
+}
+
+#reward5Icon{
+    visibility: hidden;
+}
+
+
